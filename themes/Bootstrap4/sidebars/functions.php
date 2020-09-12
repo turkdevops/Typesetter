@@ -19,7 +19,12 @@
  *
  */
 common::LoadComponents('bootstrap4-js,fontawesome');
-
+if( isset($layout_config['mobile_menu_style']['value']) &&
+	( $layout_config['mobile_menu_style']['value'] == 'offcanvas' ||
+		$layout_config['mobile_menu_style']['value'] == 'slideover' )
+){
+	common::LoadComponents('jquery-touch');
+}
 
 /**
  * Load layout javascript, if it exists
@@ -37,7 +42,9 @@ if( file_exists($layout_js) ){
 // default values
 $html_classes					= '';
 $complementary_header_classes	= 'd-none d-md-block';
+$navbar_expand_breakpoint		= 'lg';
 $navbar_classes					= 'navbar-expand-lg';
+$mobile_menu_style				= 'pulldown'; // 'pulldown' (default) | 'popup' | 'slideover' | 'offcanvas'
 $brand_logo_img					= '';
 $brand_logo_alt					= 'Logo';
 $sidebar_left_class				= ' sidebar-sticky';
@@ -75,11 +82,15 @@ if( !empty($layout_config['header_brand_logo']['value']) ){
 		'" />';
 }
 
-if( !empty($layout_config['navbar_expand_breakpoint']['value']) &&
-	$layout_config['navbar_expand_breakpoint']['value'] != 'never'
-){
-	$navbar_classes = ' navbar-expand-' . $layout_config['navbar_expand_breakpoint']['value'];
+if( !empty($layout_config['navbar_expand_breakpoint']['value']) ){
+	$navbar_expand_breakpoint = $layout_config['navbar_expand_breakpoint']['value'];
+	$navbar_classes = ' navbar-expand-' . $navbar_expand_breakpoint;
 }
+
+if( !empty($layout_config['mobile_menu_style']['value']) ){
+	$mobile_menu_style = $layout_config['mobile_menu_style']['value'];
+}
+$html_classes .= ' mobile-menu-' . $mobile_menu_style;
 
 if( isset($layout_config['sidebar_left_sticky']['value']) &&
 	!empty($layout_config['sidebar_left_sticky']['value']) 

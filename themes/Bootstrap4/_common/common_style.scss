@@ -21,7 +21,7 @@
 @import '../_common/search.scss';
 @import '../_common/mobile_menu.scss';
 @import '../_common/more_backgrounds.scss';
-@import '../_common/simple_blog_common.scss';
+@import '../_common/simple_blog_common.scss'; // adds ~40 KB css, comment this line if you're not using the Simple Blog (plugin)
 
 
 // ### Clearfixes and flex ###
@@ -163,19 +163,26 @@
 	}
 }
 
+$navbar_expand_breakpoint: lg !default; // customizer overrules
 
 .main-nav {
 	min-height: 72px; // default, will be overruled by customizer
 	// search gadget
 	.gpArea_Search,
 	.gpArea_Search-Gadget {
-		@include vp-flex-basis(10rem);
+		@include vp-flex-basis(7rem);
+		max-width: 10rem;
+		@include media-breakpoint-up($navbar_expand_breakpoint){
+			margin-left: $spacer;
+		}
 		h3,
 		input.submit {
 			display: none;
 		}
 		input.text {
-			@extend .form-control;
+			height: auto; // overrules bootstrap defaults
+			padding: 0.15rem 0.5rem; // overrules bootstrap defaults
+			border-radius: $input-border-radius; // overrules bootstrap input-group defaults
 		}
 	}
 }

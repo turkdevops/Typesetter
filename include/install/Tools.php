@@ -196,7 +196,7 @@ class Tools{
 
 
 	public static function Install_DataFiles_New($destination=false, $config=[], $base_install=true){
-		global $langmessage;
+		global $langmessage, $dirPrefix;
 
 		if( $destination === false ){
 			$destination = $GLOBALS['dataDir'];
@@ -220,13 +220,15 @@ class Tools{
 			'};';
 
 		$gpLayouts['default']['config']		= [
-			'header_brand_logo'						=> ['value' => ''],
+			'header_brand_logo'						=> ['value' => $dirPrefix . '/include/imgs/typesetter/ts-logo-o-color.svg'],
+			'header_brand_logo_alt_text'			=> ['value' => 'Logo'],
 			'header_sticky'							=> ['value' => true],
 			'complementary_header_fixed'			=> ['value' => false],
 			'complementary_header_show'				=> ['value' => 'md'],
 			'complementary_header_use_container'	=> ['value' => true],
 			'header_use_container'					=> ['value' => true],
 			'navbar_expand_breakpoint'				=> ['value' => 'lg'],
+			'main_menu_align'						=> ['value' => 'right'],
 			'mobile_menu_style'						=> ['value' => 'pulldown'],
 			'content_use_container'					=> ['value' => true],
 			'footer_use_container'					=> ['value' => true],
@@ -461,7 +463,7 @@ class Tools{
 
 		//Copyright Notice
 		$file		= $destination . '/data/_extra/Copyright_Notice/page.php';
-		$content	= '<p>&copy; $currentYear My Company</p>';
+		$content	= '<p>&copy; $currentYear My ' . CMS_NAME . '</p>';
 		self::NewExtra($file, $content);
 
 		//Header Contact

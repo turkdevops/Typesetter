@@ -137,7 +137,7 @@ namespace gp\admin\Content{
 			$this->currentDir	= $this->baseDir;
 			$this->page->label	= $langmessage['uploaded_files'];
 
-			$this->imgTypes		= array('bmp'=>1,'png'=>1,'jpg'=>1,'jpeg'=>1,'gif'=>1,'tiff'=>1,'tif'=>1,'svg'=>1,'svgz'=>1);
+			$this->imgTypes		= array('bmp'=>1,'png'=>1,'jpg'=>1,'jpeg'=>1,'gif'=>1,'tiff'=>1,'tif'=>1,'svg'=>1);
 
 			$this->SetDirectory();
 
@@ -684,7 +684,7 @@ namespace gp\admin\Content{
 				$allowed_types = array();
 			}else{
 				$allowed_types = array(
-					/** Images **/		'bmp', 'gif', 'ico', 'jpeg', 'jpg', 'png', 'tif', 'tiff', 'webp',
+					/** Images **/		'avif', 'bmp', 'gif', 'ico', 'jpeg', 'jpg', 'png', 'tif', 'tiff', 'webp',
 					/** Media **/		'aiff', 'asf', 'avi', 'fla', 'flac', 'flv', 'm4v', 'mid', 'mov', 'mp3', 'mp4', 'mpc', 'mpeg', 'mpg', 'ogg', 'oga', 'ogv', 'opus', 'qt', 'ram', 'rm', 'rmi', 'rmvb', 'swf', 'wav', 'wma', 'webm', 'wmv',
 					/** Archives **/	'7z', 'bz', 'gz', 'gzip', 'rar', 'tar', 'tgz', 'zip',
 					/** Text/Docs **/	'css', 'csv', 'doc', 'docx', 'htm', 'html', 'js', 'json', 'less', 'md', 'ods', 'odt', 'pages', 'pdf', 'ppt', 'pptx', 'rtf', 'txt', 'scss', 'sxc', 'sxw', 'vsd', 'webmanifest', 'xls', 'xlsx', 'xml', 'xsl',
@@ -692,7 +692,6 @@ namespace gp\admin\Content{
 				);
 				if( !empty($config['allow_svg_upload']) ){
 					$allowed_types[] = 'svg';
-					$allowed_types[] = 'svgz';
 				}
 			}
 
@@ -826,7 +825,7 @@ namespace gp\admin\Content{
 		 * @return bool
 		 */
 		public static function IsImg($file){
-			$img_types = array('bmp'=>1,'png'=>1,'jpg'=>1,'jpeg'=>1,'gif'=>1,'tiff'=>1,'tif'=>1,'svg'=>1, 'svgz'=>1);
+			$img_types = array('bmp'=>1,'png'=>1,'jpg'=>1,'jpeg'=>1,'gif'=>1,'tiff'=>1,'tif'=>1,'svg'=>1);
 
 			$type = self::GetFileType($file);
 
